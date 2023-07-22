@@ -16,7 +16,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        return new JobCollection(Job::paginate(10));
+        return new JobCollection(Job::latest()->get());
     }
 
     /**
