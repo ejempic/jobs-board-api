@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class UpdateJobRequest extends StoreJobRequest
 {
     /**
@@ -15,7 +17,10 @@ class UpdateJobRequest extends StoreJobRequest
 
         if($method == 'PUT'){
             return [
-                'title' => 'required|unique:jobs',
+                'title' => [
+                    'required',
+                    Rule::unique('jobs')->ignore($this->job->id),
+                ],
                 'description'=> 'required'
             ];
         }
